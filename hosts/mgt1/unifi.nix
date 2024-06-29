@@ -1,4 +1,4 @@
-{ myvars, ... }:
+{ pkgs, myvars, ... }:
 {
   services.unifi.enable = true;
   services.unifi.unifiPackage = pkgs.unifi;
