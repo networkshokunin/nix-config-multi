@@ -6,7 +6,7 @@
   services.nginx.virtualHosts."unifi.${myvars.domain}" = {
     forceSSL = true;
     useACMEHost = "unifi.${myvars.domain}";
-    locations."/".proxyPass = "http://localhost:8001";
+    locations."/".proxyPass = "http://localhost:8443";
 	  extraConfig = ''
 		  proxy_set_header Host $host;
 	  '';
