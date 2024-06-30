@@ -8,9 +8,13 @@
     useACMEHost = "${myvars.domain}";
     locations."/".proxyPass = "https://localhost:8443";
 	  extraConfig = ''
+      proxy_buffering off;
 		  proxy_set_header Host $host;
       proxy_set_header X-Real-IP $remote_addr;
       proxy_set_header X-Forward-For $proxy_add_x_forwarded_for;
+      proxy_http_version 1.1;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection "Upgrade";
 	  '';
   };
 
