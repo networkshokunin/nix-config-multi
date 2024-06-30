@@ -1,14 +1,16 @@
 { pkgs, myvars, ... }:
 {
   services.unifi.enable = true;
-  services.unifi.unifiPackage = pkgs.unifi;
+  services.unifi.unifiPackage = pkgs.unifi8;
 
   services.nginx.virtualHosts."unifi.${myvars.domain}" = {
     forceSSL = true;
     useACMEHost = "${myvars.domain}";
-    locations."/".proxyPass = "http://localhost:8443";
+    locations."/".proxyPass = "https://localhost:8443";
 	  extraConfig = ''
 		  proxy_set_header Host $host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forward-For $proxy_add_x_forwarded_for;
 	  '';
   };
 
